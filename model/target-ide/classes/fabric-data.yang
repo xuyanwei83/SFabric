@@ -1,0 +1,39 @@
+module fabric-data {
+	yang-version 1;
+	namespace "urn:opendaylight:fabric.model";
+	prefix fabric-data;
+
+	import network-topology {
+		prefix nt;
+		revision-date 2013-10-21;
+	}
+
+	organization "BNC Systems Inc";
+	contact
+		"Alex Fan <alefan@cisco.com>";
+	description
+		"YANG version of the Fabric Data Model";
+
+	revision 2014-04-02 {
+		description
+		"Fabric module draft.";
+	}
+
+	grouping fabric-data {
+	    leaf tag{
+	    	type int64;
+	    }
+	    list link{
+            key "link-id";
+        	uses nt:link-attributes;
+	    }
+	}
+
+	container fabric-datas {
+		config false;
+		list fabric-data {
+			key "tag";
+			uses fabric-data;
+		}
+	}
+}

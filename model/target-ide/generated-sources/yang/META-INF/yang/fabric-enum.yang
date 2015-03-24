@@ -1,0 +1,69 @@
+module fabric-enum {
+	yang-version 1;
+	namespace "urn:opendaylight:fabric:enumeration";
+	prefix fabric-table;
+	organization "BNC Systems Inc";
+	contact
+		"Alex Fan <alefan@cisco.com>";
+	description
+		"YANG version of the Fabric Data Model";
+
+	revision 2014-04-02 {
+		description
+		"Fabric mac-id map draft.";
+	}
+	typedef fabric-table {
+	    type enumeration {
+	        enum InPutTable {
+	            description "Table 0 deal with flow from the in-port, goto PushTagTable or SwapTagTable,when host traker and node update";
+	            value 0;
+	        }
+	        enum PushTagTable {
+	        	description "Deal with the flow from host in-port, push tag than goto SwapTagTable, when arp setup the flow";
+	            value 1;
+	        }
+	        enum SwapTagTable {
+	        	description "Deal with the flow from switch in-port, swap by tag or pop tag goto OutPutTable, when fabric setup";
+	        	value 2;
+	        }
+	        enum OutPutTable{
+	        	description "Deal with the flow from OutPutTable, swap by des mac, when host tracker";
+	        	value 3;
+	        }
+	    }
+	}
+	
+	typedef fabric-tag {
+	    type enumeration {
+	        enum MPLS {
+	            description "Use MPLS as tag";
+	            value 10;
+	        }
+	        enum VLAN {
+	        	description "Use VLAN as tag";
+	            value 6;
+	        }
+	    }
+	}
+	
+	typedef fabric-protocal {
+	    type enumeration {
+	    	enum IP {
+	    		description "IP protocal value";
+	    		value 2048;
+	    	}
+	    	enum ARP {
+	    		description "ARP protocal value";
+	    		value 2054;
+	    	}
+	        enum MPLS {
+	            description "MPLS protocal value";
+	            value 34887;
+	        }
+	        enum VLAN {
+	        	description "VLAN protocal value";
+	            value 33024;
+	        }
+	    }
+	}
+}

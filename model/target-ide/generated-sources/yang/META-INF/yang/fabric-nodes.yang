@@ -1,0 +1,42 @@
+module fabric-nodes {
+	yang-version 1;
+	namespace "urn:opendaylight:fabric:nodes";
+	prefix fabric-map;
+
+	import opendaylight-inventory {
+		prefix inv;
+		revision-date 2013-08-19;
+	}
+
+	organization "BNC Systems Inc";
+	contact
+		"Alex Fan <alefan@cisco.com>";
+	description
+		"YANG version of the Fabric Data Model";
+
+	revision 2014-04-02 {
+		description
+		"Fabric mac-id map draft.";
+	}
+
+	grouping fabric-node {
+	    leaf node-id{
+	    	type inv:node-id;
+	    }
+	    leaf "controller"{
+	    	type inv:node-connector-ref;
+	    }
+	    list "intern"{
+            uses inv:node-connector;
+	    }
+	    list "extern"{
+	    	uses inv:node-connector;
+	    }
+	}
+	container fabric-nodes{
+		list "fabric-node"{
+			key "node-id";
+			uses fabric-node;
+		}
+	}
+}

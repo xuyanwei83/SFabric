@@ -1,0 +1,38 @@
+module fabric-map {
+	yang-version 1;
+	namespace "urn:opendaylight:fabric:map";
+	prefix fabric-map;
+
+	import network-topology {
+		prefix nt;
+		revision-date 2013-10-21;
+	}
+
+	organization "BNC Systems Inc";
+	contact
+		"Alex Fan <alefan@cisco.com>";
+	description
+		"YANG version of the Fabric Data Model";
+
+	revision 2014-04-02 {
+		description
+		"Fabric mac-id map draft.";
+	}
+
+	grouping fabric-map {
+	    leaf node-id{
+	    	type nt:node-id;
+	    }
+	    leaf id{
+	    	type int64;
+	    }
+	}
+
+	container fabric-maps {
+		config false;
+		list fabric-map {
+			key "node-id";
+			uses fabric-map;
+		}
+	}
+}
